@@ -7,9 +7,13 @@ namespace vacancyWeb.Data
 {
 	public class Vacancies
 	{
+		public Vacancies()
+		{
+			Date = DateTime.Now;
+		}
 		public int? Id { get; set; }
 		public string Title { get; set; }
-		public string Date { get; set; }
+		public DateTime Date { get; set; }
 
 	}
 }

@@ -4,11 +4,13 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using vacancyWeb.Data;
 using vacancyWeb.Models;
 
 namespace vacancyWeb.Controllers
-{
+{	[Produces("application/json")]
 	public class HomeController : Controller
 	{
 		private IDAO<Vacancies, int> dao { get; set; }
@@ -47,11 +49,20 @@ namespace vacancyWeb.Controllers
 			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 		}
 
-		public IActionResult AddVacancy(Vacancies vacancy)
+		public IActionResult AddVacancy(string title, DateTime date)
 		{
-			if (vacancy != null)
+			if (title != null && date != null)
+			{
+				Vacancies vacancy = new Vacancies() { Title = title, Date = date };
 				dao.Add(vacancy);
-			return View();
+			}
+			return View("Index");
+		}
+		[HttpGet]
+		public JsonResult GetAllVacansies()
+		{
+			List<Vacancies> res = dao.getAll().ToList();
+			return Json(res);
 		}
 	}
 }

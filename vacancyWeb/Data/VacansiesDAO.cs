@@ -16,7 +16,7 @@ namespace vacancyWeb.Data
 
 		public IEnumerable<Vacancies> getAll()
 		{
-			List<Vacancies> res = dbcontext.vacancies.Where(e => e.Id != null).ToList();
+			List<Vacancies> res = dbcontext.vacancies.Where(e => e.Id != null && e.Date != null).ToList();
 			return res;
 		}
 

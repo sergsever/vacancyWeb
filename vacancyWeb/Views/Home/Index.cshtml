@@ -2,57 +2,31 @@
     ViewData["Title"] = "Home Page";
 }
 
+@{
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/css/site.css" />
+<link rel="stylesheet" href="~/css/vacansies.css" />
+
+<h3>Vacancy</h3>
+
 <div id="form">
-    <h1>Vacancy</h1>
     <form method="post" action="home/AddVacancy">
-    <label>Title:</label><input name="title" type="text" />
-        <label>Date:</label><input name="date" type= "date" />
-        <input type="submit" value="save"/>
-</form>
+        <label>Title:</label><input name="title" type="text" />
+        <label>Date:</label><input name="date" type="date" />
+        <input type="submit" value="save" />
+    </form>
 </div>
 <div id="list">
     <br />
     <br />
     <hr />
-<table id="listvacansies">
-    <tr>
-        <th>Title</th>
-        <th>Date</th>
-    </tr>
-</table>
+    <table class="vacancy" id="listvacansies">
+        <tr>
+            <th>Title</th>
+            <th>Date</th>
+        </tr>
+    </table>
 </div>
-<script type="text/javascript">
-    var fillList = function () {
-        var list = [];
-        var httpReq = new XMLHttpRequest();
-        httpReq.open("GET", "home/GetAllVacansies", false);
-        httpReq.send();
-        console.log('status: ' + httpReq.status);
-        if (httpReq.status != 200) {
-            console.log('error status:' + httpReq.status)
-        }
-        else {
-            console.log('json:' + httpReq.response)
-            var data = JSON.parse(httpReq.response);
-            console.log('parsed:' + data.length);
-            var table = document.getElementById('listvacansies');
-            for(var i = 0; i < data.length; i++) {
-                console.log('i' + i);
-                console.log('row:' + i + 't:' + data[i].title + 'd:' + data[i].date);
-                var row = table.insertRow();
-                var cellTitle = row.insertCell(0);
-                var content = document.createTextNode(data[i].title);
-                cellTitle.appendChild(content);
-                var cellDate = row.insertCell(1);
-                content = document.createTextNode(data[i].date);
-                cellDate.appendChild(content);
-
-            }
-
-
-            
-        }
-    }
-
-    fillList();
-</script>
+<script type="text/javascript" src="~/js/vacancy.js"></script>

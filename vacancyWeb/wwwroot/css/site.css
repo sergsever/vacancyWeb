@@ -35,3 +35,10 @@ body {
         display: none;
     }
 }
+
+.vacancy {
+    border: 2px solid black;
+    border-collapse: collapse;
+    color: red;
+}
+

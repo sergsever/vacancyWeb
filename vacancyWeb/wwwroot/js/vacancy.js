@@ -1,14 +1,14 @@
 ﻿var fillList = function () {
     var list = [];
     var httpReq = new XMLHttpRequest();
-    httpReq.open("GET", "home/GetAllVacansies", true);
+    httpReq.open("GET", "/home/GetAllVacansies", true);
     httpReq.onload = function (e) {
         console.log('status: ' + httpReq.status);
         if (httpReq.status != 200) {
             console.log('error status:' + httpReq.status);
         }
         else {
-            console.log('json:' + httpReq.response)
+            console.log('json:' + httpReq.response);
             var data = JSON.parse(httpReq.response);
             console.log('parsed:' + data.length);
             var table = document.getElementById('listvacansies');
